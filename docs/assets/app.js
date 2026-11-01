@@ -1,5 +1,5 @@
 /* =========================================================
-   N3TFL1X Store · lógica de la tienda (frontend)
+   Kliky · lógica de la tienda (frontend)
    ========================================================= */
 (() => {
   "use strict";

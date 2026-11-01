@@ -1,4 +1,4 @@
-# Tienda N3TFL1X · Vercel + Notion
+# Kliky · Vercel + Notion
 
 **Vercel sirve el frontend y la API**. **Notion guarda el catálogo, las portadas y
 los registros privados**. GitHub versiona el código y activa el despliegue de `main`.
