@@ -128,8 +128,9 @@ originales. Si un campo antiguo contiene datos, la migración lo conserva.
 
 ## Límites actuales
 
-- `Productos aplicables` y `Usos máximos` de promociones son informativos: la API
-  no los impone. Sí lee activación, categoría, tipo, valor y vigencia.
+- La API no impone límites de uso ni condiciones en texto libre. Los valores
+  antiguos se conservan dentro de cada página de promoción como referencia histórica.
+  Sí lee activación, categoría, tipo, valor y vigencia.
 - El stock usa la fórmula existente, que suma cantidades de pedidos relacionados.
   No es una reserva transaccional por línea: revisa disponibilidad antes de aprobar
   pedidos de varios productos.
@@ -147,3 +148,28 @@ originales. Si un campo antiguo contiene datos, la migración lo conserva.
 Si falla el catálogo, revisa logs de Vercel, `NOTION_TOKEN` y permisos de las bases.
 Si no ves una portada, confirma que está en la cabecera de la página y que el
 producto tiene estado publicable (`🟢 Activo`, `🟠 Últimos cupos` o vacío).
+
+## Simplificación adicional de Notion · 1 de noviembre de 2026
+
+Se retiraron siete columnas que no utiliza la API ni necesita ningún campo conservado:
+
+| Base | Columnas retiradas | Conservación |
+|---|---|---|
+| Productos | `Notas internas`, `Promociones` | Ambas estaban vacías; la segunda era la relación inversa de Productos aplicables |
+| Promociones | `Productos aplicables`, `Usos máximos`, `Usos restantes`, `Condición` | Límites y condiciones copiados y verificados dentro de las tres páginas antes de retirar columnas |
+| Ventas y Pedidos | `¿Se puede habilitar?` | Fórmula antigua no utilizada; la entrega se controla desde el panel |
+
+Las cinco vistas principales muestran solo los campos de trabajo diario. Tokens,
+credenciales y campos de soporte se mantienen en la base, ocultos en esas tablas.
+Ocultar columnas no cambia permisos: las bases siguen siendo privadas. Productos
+tiene además la galería **Portadas**, configurada con la portada de página.
+
+Se conservan las relaciones de pedidos, clientes, productos, promociones y pagos,
+las fórmulas de stock, los vencimientos y las métricas internas. No se alteraron
+precios, estados, credenciales, importes, archivos ni registros de negocio.
+
+Para auditar o repetir la limpieza: `npm run notion:simplify:plan` y
+`npm run notion:simplify:apply`. El script respalda esquemas, datos y vistas en
+`.vercel/notion-backup/`, comprueba dependencias y conserva los textos históricos.
+Compara las respuestas reales del catálogo, panel y seguimiento antes y después,
+además de los identificadores, tipos y valores de las propiedades conservadas.

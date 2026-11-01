@@ -56,9 +56,9 @@ async function all(path, method = 'GET') {
 }
 
 const databases = [
-  { id: '40b13bcc-c7ed-81f5-b067-f44dc8d8a17a', name: 'Productos', remove: ['Imagen (URL)'], description: 'Catálogo de la tienda en Vercel. Abre cada producto y usa Agregar portada / Cambiar portada: esa imagen aparece en la web. Edita aquí precios, categorías, planes, stock, estado y destacados. Costos, proveedor y notas son internos. No es necesario publicar esta base.' },
+  { id: '40b13bcc-c7ed-81f5-b067-f44dc8d8a17a', name: 'Productos', remove: ['Imagen (URL)'], description: 'Catálogo de la tienda en Vercel. Abre cada producto y usa Agregar portada / Cambiar portada: esa imagen aparece en la web. Edita aquí precios, categorías, planes, stock, estado y destacados. Costos y proveedor son internos. La vista Portadas muestra la imagen de cada página. No es necesario publicar esta base.' },
   { id: '40b13bcc-c7ed-81bc-b912-e64bc871fbea', name: 'Clientes', remove: ['Yape (número)', 'Titular Yape', 'Segmento'], description: 'Clientes creados por la tienda al registrar pedidos. Conserva nombre, WhatsApp, email, canal y relaciones. Segmento automático y métricas sirven para seguimiento interno. No necesitas registrar cada cliente manualmente ni pedir sus datos de Yape.' },
-  { id: '40b13bcc-c7ed-810e-9e61-d54be898a852', name: 'Promociones', remove: [], description: 'Cupones: Código, Activa, Tipo, Valor, Categoría objetivo y vigencias son leídos por la API. Condición, Productos aplicables y Usos máximos son referencias internas: la API actual no impone límites por producto ni por número de usos.' },
+  { id: '40b13bcc-c7ed-810e-9e61-d54be898a852', name: 'Promociones', remove: [], description: 'Cupones: Código, Activa, Tipo, Valor, Categoría objetivo y vigencias son leídos por la API. Las condiciones y límites antiguos se conservan como texto dentro de cada promoción; no son reglas que aplique la API.' },
   { id: '40b13bcc-c7ed-8146-8e50-d0fe7e9e4725', name: 'Ventas y Pedidos', remove: [], description: 'Registro privado de pedidos. Aprueba el monto, valida el pago y entrega credenciales desde /admin.html en Vercel. Conserva relaciones, fórmulas, tokens, campos de seguimiento y credenciales: la API los utiliza. No compartas públicamente esta base.' },
   { id: '40b13bcc-c7ed-81b9-bc91-c16a379633a6', name: 'Comprobantes Yape', remove: ['Enlace del comprobante (Drive / WhatsApp)'], description: 'Capturas y datos de Yape recibidos desde el enlace privado del pedido en Vercel. Imagen Yape almacena el archivo. La validación se realiza en /admin.html. No necesitas un formulario público de Notion ni enlaces externos a comprobantes.' },
 ];
@@ -133,7 +133,7 @@ const manualContent = [
   heading('Qué se conserva en Notion'),
   bullet('Productos: portada nativa, Producto, Categoría, Plataforma, Plan / Duración, Tipo de entrega, Garantía, Precio venta (S/), Cupos / Stock, Stock disponible, Estado, Descripción y Destacado. Costos y márgenes son opcionales para tu gestión.'),
   bullet('Clientes: datos de contacto, historial de ventas y pagos, segmentación automática y notas internas.'),
-  bullet('Promociones: código, activación, tipo, valor, categoría y fechas. La API actual no aplica Productos aplicables ni Usos máximos; son referencias internas.'),
+  bullet('Promociones: código, activación, tipo, valor, categoría y fechas. Los límites de uso y las condiciones antiguas se conservan como notas históricas dentro de cada promoción; no se aplican en la web.'),
   bullet('Ventas y Pedidos: relaciones, detalle, estados, precios, fechas, observaciones, tokens privados y credenciales. Los campos técnicos y las copias del nombre/WhatsApp sostienen el seguimiento web.'),
   bullet('Comprobantes Yape: Imagen Yape, monto, fecha, operación, validación y relaciones a cliente/pedido. Los campos con sufijo (formulario) también los escribe la web; se conservan.'),
   heading('Qué ya no hace falta'),

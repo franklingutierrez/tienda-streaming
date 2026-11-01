@@ -8,10 +8,12 @@
     "node": "26.x"
   },
   "scripts": {
-    "check": "node --check lib/api-core.js && node --check api/index.js && node --check docs/assets/app.js && node --check docs/assets/admin.js && node --check docs/assets/config.js && node --check scripts/restructure-notion.mjs",
+    "check": "node --check lib/api-core.js && node --check api/index.js && node --check docs/assets/app.js && node --check docs/assets/admin.js && node --check docs/assets/config.js && node --check scripts/restructure-notion.mjs && node --check scripts/simplify-notion.mjs",
     "test": "node --test",
     "notion:plan": "node scripts/restructure-notion.mjs",
     "notion:apply": "node scripts/restructure-notion.mjs --apply",
-    "dev": "vercel dev"
+    "dev": "vercel dev",
+    "notion:simplify:plan": "node scripts/simplify-notion.mjs",
+    "notion:simplify:apply": "node scripts/simplify-notion.mjs --apply"
   }
 }
