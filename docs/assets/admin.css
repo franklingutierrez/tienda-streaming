@@ -34,7 +34,7 @@ body.admin {
   background: radial-gradient(circle, rgba(139, 92, 255, 0.22), transparent 70%);
 }
 .stat b { display: block; font-size: 28px; letter-spacing: -0.04em; line-height: 1.1; font-family: var(--font-display); }
-.stat span { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.stat span { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
 .stat.warn { border-color: rgba(255, 194, 71, 0.28); }
 .stat.warn b { color: var(--warn); }
 .stat.info { border-color: rgba(139, 92, 255, 0.3); }
@@ -48,7 +48,7 @@ body.admin {
   background: rgba(255, 255, 255, 0.03); font-size: 13px; min-width: 260px; outline: none;
   color: var(--ink-2); transition: .2s;
 }
-.search::placeholder { color: #6f6a8d; }
+.search::placeholder { color: #8b86a6; }
 .search:focus { border-color: rgba(139, 92, 255, 0.75); box-shadow: var(--ring); }
 
 /* --------------------------------- pedidos ------------------------------ */
@@ -78,7 +78,7 @@ body.admin {
 .o-head .grow { flex: 1; }
 .o-head .who { font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
 .o-body { padding: 16px 18px 16px 20px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; }
-.o-body .block h4 { font-size: 10px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); margin: 0 0 8px; font-weight: 700; }
+.o-body .block h4 { font-size: 10.5px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); margin: 0 0 8px; font-weight: 700; }
 .o-body .block + .block { margin-top: 14px; }
 .o-lines { display: grid; gap: 5px; font-size: 13.5px; color: var(--ink-3); }
 .o-lines .line { display: flex; justify-content: space-between; gap: 10px; }
@@ -96,7 +96,7 @@ body.admin {
 }
 .pay-row a { color: #cbb6ff; font-weight: 600; }
 .pay-row a:hover { color: var(--accent); }
-.pay-status { font-size: 10.5px; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: var(--warn-soft); color: var(--warn); }
+.pay-status { font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: var(--warn-soft); color: var(--warn); }
 .pay-status.ok { background: var(--ok-soft); color: #8bf0c4; }
 .pay-status.bad { background: var(--bad-soft); color: #ffa3ac; }
 
@@ -107,7 +107,7 @@ body.admin {
 .inline-form .full { grid-column: 1 / -1; }
 .creds-mini { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 9px; font-size: 12.5px; }
 .creds-mini div { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line); border-radius: 9px; padding: 9px 11px; }
-.creds-mini span { display: block; font-size: 9.5px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); font-weight: 700; margin-bottom: 3px; }
+.creds-mini span { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); font-weight: 700; margin-bottom: 3px; }
 .creds-mini b { font-family: var(--font-mono); word-break: break-all; color: var(--accent); }
 .mask { filter: blur(4px); cursor: pointer; }
 .mask:hover { filter: none; }

@@ -512,10 +512,10 @@
       body += `<div class="card panel">
         <h3>💜 Paga con Yape</h3>
         <div class="yape-box">
-          <div><div style="font-size:12px;opacity:.8">Monto aprobado</div><div class="amount">${money(o.amount)}</div></div>
+          <div><div style="font-size:12px;opacity:.92">Monto aprobado</div><div class="amount">${money(o.amount)}</div></div>
           <div class="yape-phone"><span>${esc(o.yape?.number || "Configura YAPE_NUMBER")}</span>
             <button type="button" data-copy="${esc(o.yape?.number || "")}">Copiar</button></div>
-          <div style="font-size:12.5px;opacity:.85">Titular: ${esc(o.yape?.name || "—")}</div>
+          <div style="font-size:12.5px;opacity:.92">Titular: ${esc(o.yape?.name || "—")}</div>
         </div>
         <form id="payForm" class="form-grid" style="margin-top:16px">
           <div class="field span2"><span>Captura de Yape *</span>

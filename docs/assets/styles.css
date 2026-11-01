@@ -112,7 +112,7 @@ p { margin: 0; }
 .brand-mark {
   display: grid; place-items: center;
   width: 40px; height: 40px; border-radius: 13px;
-  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  background: linear-gradient(135deg, #7c3aed, #db2777);
   color: #fff; font-size: 14px; letter-spacing: -0.5px; font-weight: 700;
   box-shadow: 0 10px 24px rgba(139, 92, 255, 0.4), inset 0 1px 0 rgba(255,255,255,.35);
   position: relative;
@@ -255,7 +255,8 @@ main { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; paddin
 }
 .btn:active { transform: translateY(1px) scale(.995); }
 .btn-primary {
-  background: linear-gradient(120deg, var(--brand), #a855f7 45%, var(--brand-2));
+  /* paradas con contraste ≥ 4.5:1 frente a texto blanco (WCAG AA) */
+  background: linear-gradient(120deg, #7c3aed 0%, #9333ea 42%, #db2777 100%);
   color: #fff; box-shadow: 0 12px 28px rgba(139, 92, 255, 0.35), inset 0 1px 0 rgba(255,255,255,.28);
 }
 .btn-primary::after {
@@ -285,7 +286,7 @@ main { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; paddin
 .icon-btn:hover { background: rgba(255, 93, 108, 0.16); color: #ffb3ba; border-color: rgba(255, 93, 108, 0.35); }
 
 /* ------------------------------ secciones ------------------------------- */
-.section { padding: 46px 0; position: relative; }
+.section { padding: 46px 0; position: relative; scroll-margin-top: 88px; }
 .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
 .section-head h2, .section > h2 { font-size: clamp(26px, 3.2vw, 38px); letter-spacing: -0.04em; }
 .section-head p { margin-top: 8px; font-size: 14px; }
@@ -344,13 +345,13 @@ main { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; paddin
 .p-flag {
   position: absolute; top: 12px; left: 12px; padding: 5px 10px; border-radius: 999px;
   background: var(--accent); color: var(--accent-ink);
-  font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
   box-shadow: 0 8px 18px rgba(200, 255, 61, 0.25);
 }
 .p-body { position: relative; z-index: 1; padding: 16px 17px 17px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
 .p-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .chip-cat {
-  font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
   color: #c9b6ff; background: rgba(139, 92, 255, 0.14); border: 1px solid rgba(139, 92, 255, 0.26);
   padding: 4px 9px; border-radius: 999px;
 }
@@ -454,7 +455,7 @@ main { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; paddin
   background: rgba(255, 255, 255, 0.03); font-size: 14px; font-weight: 400; color: var(--ink-2); outline: none;
   transition: border-color .2s, background .2s, box-shadow .2s;
 }
-.field input::placeholder, .field textarea::placeholder { color: #6f6a8d; }
+.field input::placeholder, .field textarea::placeholder { color: #8b86a6; }
 .field input:focus, .field textarea:focus, .field select:focus {
   border-color: rgba(139, 92, 255, 0.75); box-shadow: var(--ring); background: rgba(255, 255, 255, 0.05);
 }
@@ -559,7 +560,7 @@ main { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; paddin
   position: relative; background: rgba(255, 255, 255, 0.035); border: 1px solid var(--line-2);
   border-radius: 13px; padding: 14px 15px; display: grid; gap: 5px;
 }
-.cred span { font-size: 9.5px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); font-weight: 700; }
+.cred span { font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); font-weight: 700; }
 .cred b { font-family: var(--font-mono); font-size: 14px; word-break: break-all; color: var(--accent); }
 .cred button {
   position: absolute; top: 9px; right: 9px; background: rgba(255,255,255,.07); color: var(--ink-3);
@@ -606,7 +607,7 @@ main { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; paddin
 .dock { display: none; }
 .dock a, .dock button {
   display: grid; justify-items: center; gap: 3px; padding: 8px 14px; border: 0; background: none;
-  color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .02em; cursor: pointer; position: relative;
+  color: var(--muted); font-size: 10.5px; font-weight: 600; letter-spacing: .02em; cursor: pointer; position: relative;
 }
 .dock a i, .dock button i { font-style: normal; font-size: 19px; line-height: 1; }
 .dock .active { color: var(--accent); }
