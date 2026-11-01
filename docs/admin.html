@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Panel de administración</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/admin.css" />
+</head>
+<body class="admin">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">AD</span>
+      <span class="brand-text">Panel</span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">← Ver tienda</a>
+    </nav>
+    <button class="cart-btn" id="logoutBtn" type="button" hidden>Cerrar sesión</button>
+  </header>
+
+  <div class="setup-banner" id="setupBanner" hidden>
+    Configura <code>API_BASE</code> en <code>assets/config.js</code> con la URL de tu API en Vercel.
+  </div>
+
+  <main class="admin-main">
+    <!-- LOGIN -->
+    <section id="loginView" class="login-card card">
+      <h1>Acceso administrador</h1>
+      <p class="muted">Ingresa tu contraseña para aprobar pedidos, validar pagos y entregar accesos.</p>
+      <form id="loginForm" class="form-grid" style="margin-top:18px">
+        <label class="field span2"><span>Contraseña</span>
+          <input type="password" name="password" required autocomplete="current-password" placeholder="••••••••" />
+        </label>
+        <button class="btn btn-primary span2" type="submit">Entrar</button>
+      </form>
+      <p class="hint" id="loginHint" style="margin-top:10px"></p>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashView" hidden>
+      <div class="dash-head">
+        <div>
+          <h1>Pedidos</h1>
+          <p class="muted" id="dashSub">Flujo: pendiente → aprobado → pago en revisión → pago validado → entregado.</p>
+        </div>
+        <button class="btn btn-ghost" id="refreshBtn" type="button">↻ Actualizar</button>
+      </div>
+
+      <div class="stats" id="stats"></div>
+
+      <div class="toolbar">
+        <div class="filters" id="adminFilters"></div>
+        <input class="search" id="searchInput" placeholder="Buscar por código, nombre o WhatsApp…" />
+      </div>
+
+      <div id="ordersList" class="orders"></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>

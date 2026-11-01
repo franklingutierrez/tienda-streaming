@@ -1,0 +1,14 @@
+{
+  "name": "n3tfl1x-store-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "API serverless (Vercel) para la tienda con Notion como base de datos",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node --check lib/api-core.js && node --check api/index.js",
+    "dev": "vercel dev"
+  }
+}

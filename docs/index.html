@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tienda · Streaming, IA y libros digitales</title>
+  <meta name="description" content="Compra cuentas de streaming, IA y libros digitales. Pago por Yape y entrega verificada." />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#/">
+      <span class="brand-mark">N3</span>
+      <span class="brand-text" id="brandName">Tienda</span>
+    </a>
+    <nav class="main-nav">
+      <a href="#/" data-nav="catalog">Catálogo</a>
+      <a href="#/pedido" data-nav="order">Mi pedido</a>
+    </nav>
+    <button class="cart-btn" id="cartBtn" type="button" aria-label="Abrir carrito">
+      <span>Carrito</span>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </header>
+
+  <div class="setup-banner" id="setupBanner" hidden>
+    Configura <code>API_BASE</code> en <code>assets/config.js</code> con la URL de tu API en Vercel.
+  </div>
+
+  <main>
+    <!-- ===================== CATÁLOGO ===================== -->
+    <section id="view-catalog">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Entrega verificada · Pago por Yape</span>
+          <h1>Tu <span class="grad">entretenimiento</span> y tus herramientas de IA, sin vueltas.</h1>
+          <p class="hero-sub" id="heroSub">Cuentas de streaming, IA y libros digitales con atención personal y soporte real.</p>
+          <div class="hero-actions">
+            <a href="#productos" class="btn btn-primary">Ver catálogo</a>
+            <a href="#/pedido" class="btn btn-ghost">Ya compré · seguir mi pedido</a>
+          </div>
+          <ul class="trust">
+            <li>✅ Pago seguro con Yape</li>
+            <li>⚡ Entrega tras validar el pago</li>
+            <li>🛟 Garantía según producto</li>
+          </ul>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-head">
+            <span class="dot"></span> Pedido en vivo
+          </div>
+          <ol class="mini-steps">
+            <li><b>1</b> Eliges tu producto</li>
+            <li><b>2</b> Apruebo tu pedido y te doy el monto</li>
+            <li><b>3</b> Subes tu captura de Yape</li>
+            <li><b>4</b> Valido el pago</li>
+            <li><b>5</b> Recibes tu usuario, clave y PIN</li>
+          </ol>
+          <p class="mini-note">Tus datos de acceso se muestran solo en tu enlace privado.</p>
+        </div>
+      </section>
+
+      <section id="productos" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Catálogo</h2>
+            <p class="muted">Precios en soles. Stock actualizado en tiempo real desde Notion.</p>
+          </div>
+          <div class="filters" id="filters"></div>
+        </div>
+        <div class="product-grid" id="productGrid">
+          <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+        </div>
+      </section>
+
+      <section class="section how">
+        <h2>Cómo funciona</h2>
+        <div class="how-grid">
+          <article><span>🛒</span><h3>1. Haz tu pedido</h3><p>Elige el producto y deja tu WhatsApp. No pagas nada todavía.</p></article>
+          <article><span>💬</span><h3>2. Te apruebo el monto</h3><p>Reviso disponibilidad y te confirmo el precio final en tu enlace de seguimiento.</p></article>
+          <article><span>📸</span><h3>3. Sube tu Yape</h3><p>Paga el monto aprobado y adjunta la captura con el número de operación.</p></article>
+          <article><span>🔐</span><h3>4. Recibe tu acceso</h3><p>Valido el pago y aparecen tus credenciales: usuario, contraseña, perfil y PIN.</p></article>
+        </div>
+      </section>
+    </section>
+
+    <!-- ===================== MI PEDIDO ===================== -->
+    <section id="view-order" hidden>
+      <div class="lookup card" id="lookupCard">
+        <h2>Consultar mi pedido</h2>
+        <p class="muted">Abre el enlace privado que te envié. Si lo perdiste, pega aquí el enlace completo o el código + clave.</p>
+        <form id="lookupForm" class="form-grid">
+          <label class="field span2">
+            <span>Enlace o código de seguimiento</span>
+            <input name="code" id="lookupCode" placeholder="https://…/#/pedido/ABCD1234?k=…  o  ABCD1234" autocomplete="off" />
+          </label>
+          <label class="field span2">
+            <span>Clave privada (solo si pegaste el código)</span>
+            <input name="key" id="lookupKey" placeholder="Clave de tu enlace" autocomplete="off" />
+          </label>
+          <button class="btn btn-primary span2" type="submit">Ver mi pedido</button>
+        </form>
+        <p class="hint" id="lookupHint"></p>
+      </div>
+      <div id="orderPanel"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong id="footerBrand">Tienda</strong>
+      <p class="muted">Pagos por Yape · Atención por WhatsApp</p>
+    </div>
+    <div class="footer-links">
+      <a href="#/" >Catálogo</a>
+      <a href="#/pedido">Mi pedido</a>
+      <a id="waLink" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </footer>
+
+  <!-- ===================== CARRITO ===================== -->
+  <div class="drawer-backdrop" id="cartBackdrop" hidden></div>
+  <aside class="drawer" id="cartDrawer" hidden aria-label="Carrito">
+    <header class="drawer-head">
+      <h3>Tu pedido</h3>
+      <button class="icon-btn" id="closeCart" type="button" aria-label="Cerrar">✕</button>
+    </header>
+    <div class="drawer-body" id="cartItems"></div>
+    <footer class="drawer-foot">
+      <div class="totals">
+        <span>Total</span>
+        <strong id="cartTotal">S/ 0</strong>
+      </div>
+      <button class="btn btn-primary btn-block" id="checkoutBtn" type="button" disabled>Continuar pedido</button>
+      <p class="hint">No pagas ahora. Primero apruebo el monto.</p>
+    </footer>
+  </aside>
+
+  <!-- ===================== CHECKOUT ===================== -->
+  <div class="modal-backdrop" id="checkoutBackdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <header class="modal-head">
+        <h3 id="checkoutTitle">Datos del pedido</h3>
+        <button class="icon-btn" id="closeCheckout" type="button" aria-label="Cerrar">✕</button>
+      </header>
+      <form id="checkoutForm" class="modal-body form-grid">
+        <label class="field"><span>Nombre completo *</span><input name="name" required minlength="2" maxlength="80" placeholder="Ej: Ana Pérez" /></label>
+        <label class="field"><span>WhatsApp *</span><input name="whatsapp" required inputmode="tel" maxlength="20" placeholder="51987654321" /></label>
+        <label class="field span2"><span>Email (opcional)</span><input name="email" type="email" maxlength="120" placeholder="tucorreo@email.com" /></label>
+        <label class="field span2"><span>Código de promoción (opcional)</span><input name="promoCode" maxlength="30" placeholder="Ej: PROMO10" /></label>
+        <label class="field span2"><span>¿Algo que deba saber? (opcional)</span><textarea name="note" rows="3" maxlength="900" placeholder="Ej: necesito el perfil 2, o quiero renovar 3 meses"></textarea></label>
+        <div class="checkout-summary span2" id="checkoutSummary"></div>
+        <button class="btn btn-primary span2" type="submit" id="submitOrder">Enviar pedido</button>
+        <p class="hint span2">Al enviar aceptas que te contacte por WhatsApp para confirmar el monto.</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

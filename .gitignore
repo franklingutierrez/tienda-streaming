@@ -1,0 +1,19 @@
+# Secretos y configuración local
+.env
+.env.*
+!.env.example
+
+# Vercel
+.vercel/
+
+# Dependencias
+node_modules/
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
