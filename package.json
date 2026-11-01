@@ -5,7 +5,7 @@
   "type": "module",
   "description": "API serverless (Vercel) para la tienda con Notion como base de datos",
   "engines": {
-    "node": ">=20"
+    "node": "26.x"
   },
   "scripts": {
     "check": "node --check lib/api-core.js && node --check api/index.js",
