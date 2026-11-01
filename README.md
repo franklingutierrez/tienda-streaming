@@ -22,15 +22,18 @@ Cliente pide → admin aprueba monto → cliente paga por Yape y sube captura
 
 ## Puesta en marcha
 
+**Ya está desplegado:** <https://tienda-streaming-swart.vercel.app>
+· panel: `/admin.html`
+
 La guía completa está en **[docs/README.md](docs/README.md)**:
 configurar Notion, desplegar la API en Vercel, variables de entorno, publicar en
-GitHub Pages y checklist de pruebas.
+GitHub Pages (opcional) y checklist de pruebas.
 
-Resumen:
+Resumen del despliegue:
 
-1. Importa este repo en Vercel y define `NOTION_TOKEN`, `ADMIN_PASSWORD`,
-   `ALLOWED_ORIGIN`, `YAPE_NUMBER` y `YAPE_NAME`.
-2. Copia la URL de Vercel en `docs/assets/config.js` (`API_BASE`).
-3. Activa GitHub Pages con la carpeta `/docs`.
+1. Proyecto de Vercel importado desde este repo.
+2. Variables: `NOTION_TOKEN`, `ADMIN_PASSWORD`, `ALLOWED_ORIGIN`, `YAPE_NUMBER`, `YAPE_NAME`.
+3. Vercel sirve el frontend desde `docs/` (`"outputDirectory": "docs"` en `vercel.json`).
+4. La API vive en `/api` y recibe la ruta lógica en `?route=/api/...`.
 
 > Nunca subas `.env`: contiene secretos. El `.gitignore` ya lo protege.

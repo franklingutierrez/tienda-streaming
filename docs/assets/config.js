@@ -3,8 +3,8 @@
    Edita este archivo después de desplegar la API en Vercel.
    ------------------------------------------------------------------ */
 window.APP_CONFIG = {
-  // URL de la API en Vercel (sin barra final), ej: https://mi-tienda.vercel.app
-  API_BASE: "https://TU-API.vercel.app",
+  // URL de la API en Vercel (sin barra final)
+  API_BASE: "https://tienda-streaming-swart.vercel.app",
 
   BRAND: "N3TFL1X Store",
   TAGLINE: "Cuentas de streaming, IA y libros digitales al mejor precio",

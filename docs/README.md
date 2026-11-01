@@ -1,8 +1,12 @@
 # Tienda N3TFL1X · HTML + Notion + Vercel
 
 Tienda de cuentas de streaming, cuentas de IA y libros digitales.
-El **frontend es HTML puro** (se publica en GitHub Pages) y **toda la información vive en Notion**.
+El **frontend es HTML puro** (Vercel lo sirve desde `docs/`, y también puede publicarse en GitHub Pages)
+y **toda la información vive en Notion**.
 Las operaciones que necesitan el token de Notion pasan por una **Vercel Function** (gratis).
+
+**Sitio en producción:** <https://tienda-streaming-swart.vercel.app>
+**Panel admin:** <https://tienda-streaming-swart.vercel.app/admin.html>
 
 > El token de Notion **nunca** se coloca en el HTML: si estuviera ahí, cualquiera podría
 > leerlo con F12 y acceder a todas tus ventas y credenciales. Por eso la API vive en Vercel,
@@ -160,7 +164,7 @@ Edita **`docs/assets/config.js`**:
 
 ```js
 window.APP_CONFIG = {
-  API_BASE: "https://TU-PROYECTO.vercel.app",
+  API_BASE: "https://tienda-streaming-swart.vercel.app",
   BRAND: "N3TFL1X Store",
   TAGLINE: "Cuentas de streaming, IA y libros digitales al mejor precio",
   WHATSAPP: "51987654321",
@@ -176,38 +180,27 @@ window.APP_CONFIG = {
 
 ---
 
-## 7. Publicar en GitHub Pages
+## 7. Publicar el frontend
 
-1. Crea un repositorio en GitHub (público, o privado con Pages según tu plan).
-2. Sube el proyecto completo (la carpeta `docs/` es la que se publica).
-   El `.gitignore` de la raíz evita subir `.env`:
+Vercel ya sirve el frontend desde `docs/` (configurado con `"outputDirectory": "docs"` en
+`vercel.json`), así que la tienda funciona en la raíz del dominio:
 
-   ```bash
-   git init
-   git add .
-   git commit -m "Tienda HTML + Notion + Vercel"
-   git branch -M main
-   git remote add origin https://github.com/TU-USUARIO/TU-REPO.git
-   git push -u origin main
-   ```
+- Tienda: `https://tienda-streaming-swart.vercel.app/`
+- Panel: `https://tienda-streaming-swart.vercel.app/admin.html`
 
-3. En GitHub: **Settings → Pages** → *Source*: **Deploy from a branch** →
+> **Ojo:** las URLs de *preview* (`...-<hash>-frankllins-projects....vercel.app`) están
+> protegidas con login de Vercel. Usa siempre el dominio de producción.
+
+### GitHub Pages (opcional)
+
+Si además quieres el dominio `github.io`:
+
+1. GitHub → **Settings → Pages** → *Source*: **Deploy from a branch** →
    Branch: `main` / carpeta **`/docs`** → **Save**.
-4. Espera 1–2 minutos. Tu tienda quedará en:
-   `https://TU-USUARIO.github.io/TU-REPO/`
-   y el panel en:
-   `https://TU-USUARIO.github.io/TU-REPO/admin.html`
-5. Vuelve a Vercel → **Settings → Environment Variables** y actualiza `ALLOWED_ORIGIN`
-   con el **origen** exacto (sin la ruta del repo), por ejemplo
-   `https://TU-USUARIO.github.io`. Guarda y vuelve a desplegar (**Redeploy**).
-
-> **Nota:** GitHub Pages solo publica desde la raíz del repo o desde `/docs`.
-> Por eso el frontend ya está dentro de `docs/`. Si prefieres publicar desde la raíz,
-> mueve el contenido de `docs/` a la raíz y elige `/ (root)`
-> (en ese caso `api/` y `lib/` también se publicarían como archivos estáticos: no es peligroso,
-> pero no tiene sentido; lo recomendable es dejar `/docs`).
-
-> **Importante:** nunca subas el archivo `.env`. El `.gitignore` de la raíz ya lo protege.
+2. La tienda queda en `https://TU-USUARIO.github.io/TU-REPO/`
+   y el panel en `https://TU-USUARIO.github.io/TU-REPO/admin.html`.
+3. `ALLOWED_ORIGIN` ya incluye `https://franklingutierrez.github.io`, así que la API
+   responderá también desde ahí.
 
 ---
 
