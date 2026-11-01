@@ -101,6 +101,7 @@
     bindUI();
     loadCatalog();
     updateCartCount();
+    initMotion();
     handleRoute();
     window.addEventListener("hashchange", handleRoute);
 
@@ -120,6 +121,7 @@
 
   function bindUI() {
     $("#cartBtn").addEventListener("click", openCart);
+    $("#dockCart")?.addEventListener("click", openCart);
     $("#closeCart").addEventListener("click", closeCart);
     $("#cartBackdrop").addEventListener("click", closeCart);
     $("#checkoutBtn").addEventListener("click", openCheckout);
@@ -128,6 +130,44 @@
     $("#checkoutForm").addEventListener("submit", submitOrder);
     $("#lookupForm").addEventListener("submit", onLookup);
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeCart(); closeCheckout(); } });
+  }
+
+  /* ------------------------------ animaciones ---------------------------- */
+
+  function initMotion() {
+    const reveals = $$(".reveal");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!("IntersectionObserver" in window) || reduce) {
+      reveals.forEach((el) => el.classList.add("in"));
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          });
+        },
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.05 }
+      );
+      reveals.forEach((el) => io.observe(el));
+    }
+
+    // Halo que sigue al cursor sobre las tarjetas (delegado: el grid se re-renderiza)
+    const grid = $("#productGrid");
+    if (grid && !reduce) {
+      grid.addEventListener(
+        "pointermove",
+        (e) => {
+          const card = e.target.closest(".p-card");
+          if (!card) return;
+          const r = card.getBoundingClientRect();
+          card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+          card.style.setProperty("--my", `${e.clientY - r.top}px`);
+        },
+        { passive: true }
+      );
+    }
   }
 
   /* ------------------------------- catálogo ----------------------------- */
@@ -169,13 +209,13 @@
       return;
     }
     grid.innerHTML = list
-      .map((p) => {
+      .map((p, i) => {
         const key = (p.category || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         const emoji = EMOJI[key] || "✨";
         const stock = p.stock === null || p.stock === undefined ? "" : p.stock <= 0 ? "Agotado" : p.stock <= 3 ? `¡Quedan ${p.stock}!` : `${p.stock} disponibles`;
         const stockCls = p.stock !== null && p.stock !== undefined ? (p.stock <= 0 ? "out" : p.stock <= 3 ? "low" : "") : "";
         return `
-        <article class="p-card">
+        <article class="p-card" style="--i:${i}">
           <div class="p-media ${esc(key)}">
             ${p.highlighted ? `<span class="p-flag">Recomendado</span>` : ""}
             ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" />` : emoji}
@@ -236,7 +276,13 @@
   }
 
   function updateCartCount() {
-    $("#cartCount").textContent = cartUnits();
+    const units = cartUnits();
+    $("#cartCount").textContent = units;
+    const dock = $("#dockCount");
+    if (dock) {
+      dock.textContent = units;
+      dock.hidden = units === 0;
+    }
     $("#checkoutBtn").disabled = !state.cart.length;
   }
 
@@ -360,7 +406,7 @@
   function showView(name) {
     $("#view-catalog").hidden = name !== "catalog";
     $("#view-order").hidden = name !== "order";
-    $$(".main-nav a").forEach((a) => a.classList.toggle("active", a.dataset.nav === name));
+    $$("[data-nav]").forEach((a) => a.classList.toggle("active", a.dataset.nav === name));
     window.scrollTo({ top: 0, behavior: "instant" });
   }
 

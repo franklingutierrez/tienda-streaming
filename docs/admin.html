@@ -4,11 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#06050e" />
   <title>Panel de administración</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
   <link rel="stylesheet" href="assets/admin.css" />
 </head>
 <body class="admin">
+  <div class="noise" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+
   <header class="site-header">
     <a class="brand" href="index.html">
       <span class="brand-mark">AD</span>
@@ -27,6 +34,7 @@
   <main class="admin-main">
     <!-- LOGIN -->
     <section id="loginView" class="login-card card">
+      <span class="sect-label">Acceso restringido</span>
       <h1>Acceso administrador</h1>
       <p class="muted">Ingresa tu contraseña para aprobar pedidos, validar pagos y entregar accesos.</p>
       <form id="loginForm" class="form-grid" style="margin-top:18px">
@@ -42,6 +50,7 @@
     <section id="dashView" hidden>
       <div class="dash-head">
         <div>
+          <span class="sect-label">Centro de control</span>
           <h1>Pedidos</h1>
           <p class="muted" id="dashSub">Flujo: pendiente → aprobado → pago en revisión → pago validado → entregado.</p>
         </div>

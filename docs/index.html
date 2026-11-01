@@ -5,9 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tienda · Streaming, IA y libros digitales</title>
   <meta name="description" content="Compra cuentas de streaming, IA y libros digitales. Pago por Yape y entrega verificada." />
+  <meta name="theme-color" content="#06050e" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+
   <header class="site-header">
     <a class="brand" href="#/">
       <span class="brand-mark">N3</span>
@@ -27,16 +34,23 @@
     Configura <code>API_BASE</code> en <code>assets/config.js</code> con la URL de tu API en Vercel.
   </div>
 
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Streaming <i>✦</i> IA <i>✦</i> Ebooks <i>✦</i> Diseño <i>✦</i> Música <i>✦</i> Pago por Yape <i>✦</i> Entrega verificada <i>✦</i> Soporte real <i>✦</i></span>
+      <span>Streaming <i>✦</i> IA <i>✦</i> Ebooks <i>✦</i> Diseño <i>✦</i> Música <i>✦</i> Pago por Yape <i>✦</i> Entrega verificada <i>✦</i> Soporte real <i>✦</i></span>
+    </div>
+  </div>
+
   <main>
     <!-- ===================== CATÁLOGO ===================== -->
     <section id="view-catalog">
       <section class="hero">
         <div class="hero-copy">
           <span class="eyebrow">Entrega verificada · Pago por Yape</span>
-          <h1>Tu <span class="grad">entretenimiento</span> y tus herramientas de IA, sin vueltas.</h1>
+          <h1>Tu <span class="grad">entretenimiento</span><br />y tus herramientas de IA, sin vueltas.</h1>
           <p class="hero-sub" id="heroSub">Cuentas de streaming, IA y libros digitales con atención personal y soporte real.</p>
           <div class="hero-actions">
-            <a href="#productos" class="btn btn-primary">Ver catálogo</a>
+            <a href="#productos" class="btn btn-primary">Ver catálogo →</a>
             <a href="#/pedido" class="btn btn-ghost">Ya compré · seguir mi pedido</a>
           </div>
           <ul class="trust">
@@ -60,10 +74,11 @@
         </div>
       </section>
 
-      <section id="productos" class="section">
+      <section id="productos" class="section reveal">
         <div class="section-head">
           <div>
-            <h2>Catálogo</h2>
+            <span class="sect-label">01 — Catálogo</span>
+            <h2>Elige tu acceso</h2>
             <p class="muted">Precios en soles. Stock actualizado en tiempo real desde Notion.</p>
           </div>
           <div class="filters" id="filters"></div>
@@ -73,8 +88,9 @@
         </div>
       </section>
 
-      <section class="section how">
-        <h2>Cómo funciona</h2>
+      <section class="section how reveal">
+        <span class="sect-label">02 — Cómo funciona</span>
+        <h2>De tu Yape a tu pantalla</h2>
         <div class="how-grid">
           <article><span>🛒</span><h3>1. Haz tu pedido</h3><p>Elige el producto y deja tu WhatsApp. No pagas nada todavía.</p></article>
           <article><span>💬</span><h3>2. Te apruebo el monto</h3><p>Reviso disponibilidad y te confirmo el precio final en tu enlace de seguimiento.</p></article>
@@ -87,6 +103,7 @@
     <!-- ===================== MI PEDIDO ===================== -->
     <section id="view-order" hidden>
       <div class="lookup card" id="lookupCard">
+        <span class="sect-label">Seguimiento</span>
         <h2>Consultar mi pedido</h2>
         <p class="muted">Abre el enlace privado que te envié. Si lo perdiste, pega aquí el enlace completo o el código + clave.</p>
         <form id="lookupForm" class="form-grid">
@@ -117,6 +134,13 @@
       <a id="waLink" href="#" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </footer>
+
+  <!-- ===================== NAV MÓVIL ===================== -->
+  <nav class="dock" aria-label="Navegación rápida">
+    <a href="#/" data-nav="catalog"><i>⌂</i><span>Tienda</span></a>
+    <a href="#/pedido" data-nav="order"><i>◈</i><span>Mi pedido</span></a>
+    <button type="button" id="dockCart"><i>▤</i><span>Carrito</span><em id="dockCount" hidden>0</em></button>
+  </nav>
 
   <!-- ===================== CARRITO ===================== -->
   <div class="drawer-backdrop" id="cartBackdrop" hidden></div>
