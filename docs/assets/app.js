@@ -114,6 +114,8 @@
     };
     document.addEventListener("visibilitychange", refreshCatalog);
     window.addEventListener("focus", refreshCatalog);
+    // Y también cada minuto, por si dejas la tienda abierta mientras editas Notion.
+    setInterval(refreshCatalog, 60000);
   }
 
   function bindUI() {
