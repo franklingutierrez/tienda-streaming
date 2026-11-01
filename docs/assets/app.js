@@ -103,6 +103,17 @@
     updateCartCount();
     handleRoute();
     window.addEventListener("hashchange", handleRoute);
+
+    // Refresca el catálogo al volver a la pestaña (por si editaste Notion entretanto).
+    let lastRefresh = Date.now();
+    const refreshCatalog = () => {
+      if (document.visibilityState === "hidden") return;
+      if (Date.now() - lastRefresh < 5000) return;
+      lastRefresh = Date.now();
+      loadCatalog(true);
+    };
+    document.addEventListener("visibilitychange", refreshCatalog);
+    window.addEventListener("focus", refreshCatalog);
   }
 
   function bindUI() {
@@ -119,14 +130,16 @@
 
   /* ------------------------------- catálogo ----------------------------- */
 
-  async function loadCatalog() {
+  async function loadCatalog(silent) {
     const grid = $("#productGrid");
     try {
-      const data = await api("/api/catalog");
+      // sello de tiempo para que ningún proxy/CDN sirva una copia vieja del catálogo
+      const data = await api(`/api/catalog?t=${Date.now()}`);
       state.products = data.products || [];
       renderFilters();
       renderProducts();
     } catch (err) {
+      if (silent) return; // un refresco en segundo plano no debe romper la vista
       grid.innerHTML = `<div class="empty"><strong>No se pudo cargar el catálogo</strong><br><span class="muted">${esc(err.message)}</span></div>`;
     }
   }
