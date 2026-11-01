@@ -525,10 +525,22 @@ main { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; paddin
   color: #fff; border-radius: 18px; padding: 20px;
   box-shadow: 0 20px 44px rgba(139, 92, 255, 0.28);
 }
+.yape-box-with-qr { grid-template-columns: minmax(0, 1fr) minmax(200px, 260px); gap: 28px; align-items: center; }
+.yape-details { position: relative; z-index: 1; min-width: 0; display: grid; gap: 16px; }
+.yape-label { font-size: 12px; margin-bottom: 6px; }
+.yape-holder { font-size: 13px; overflow-wrap: anywhere; }
+.yape-help { font-size: 13px; line-height: 1.6; max-width: 38ch; }
+.yape-qr { position: relative; z-index: 1; margin: 0; min-width: 0; padding: 12px; border-radius: 16px; background: #fff; color: #351044; text-align: center; }
+.yape-qr-image { display: block; border-radius: 8px; }
+.yape-qr img { display: block; width: 100%; height: auto; object-fit: contain; }
+.yape-qr figcaption { margin-top: 10px; font-size: 14px; font-weight: 700; }
+.yape-qr-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; margin-top: 8px; }
+.yape-qr-actions a { display: inline-block; padding: 6px 0; color: #691788; font-size: 12px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.yape-qr a:focus-visible { outline: 3px solid #691788; outline-offset: 3px; }
 .yape-box::after {
   content: ""; position: absolute; inset: -40% -10% auto auto; width: 55%; height: 200%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
-  transform: rotate(20deg);
+  transform: rotate(20deg); pointer-events: none; z-index: 0;
 }
 .yape-box .amount { font-size: 34px; font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; }
 .yape-phone {
@@ -536,7 +548,9 @@ main { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; paddin
   background: rgba(10, 6, 24, 0.35); border: 1px solid rgba(255,255,255,.2);
   padding: 11px 13px; border-radius: 12px; font-family: var(--font-mono); letter-spacing: .06em;
 }
+.yape-phone span { min-width: 0; overflow-wrap: anywhere; }
 .yape-phone button {
+  flex-shrink: 0;
   background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 9px;
   padding: 7px 12px; font-weight: 700; font-size: 11.5px; cursor: pointer; letter-spacing: 0;
 }
@@ -656,6 +670,8 @@ main { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; paddin
   .stepper .step::before { width: 15px; height: 15px; top: 9px; }
   .stepper .step::after { top: 17px; }
   .yape-box .amount { font-size: 30px; }
+  .yape-box-with-qr { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .yape-qr { width: 100%; max-width: 290px; justify-self: center; }
   .site-footer::before { bottom: -18px; }
 
   .dock {

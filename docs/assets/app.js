@@ -518,13 +518,30 @@
     }
 
     if (o.canPay) {
+      const qrImage = CFG.YAPE_QR_IMAGE || "";
       body += `<div class="card panel">
         <h3>💜 Paga con Yape</h3>
-        <div class="yape-box">
-          <div><div style="font-size:12px;opacity:.92">Monto aprobado</div><div class="amount">${money(o.amount)}</div></div>
-          <div class="yape-phone"><span>${esc(o.yape?.number || "Configura YAPE_NUMBER")}</span>
-            <button type="button" data-copy="${esc(o.yape?.number || "")}">Copiar</button></div>
-          <div style="font-size:12.5px;opacity:.92">Titular: ${esc(o.yape?.name || "—")}</div>
+        <div class="yape-box ${qrImage ? "yape-box-with-qr" : ""}">
+          <div class="yape-details">
+            <div><div class="yape-label">Monto aprobado</div><div class="amount">${money(o.amount)}</div></div>
+            <div>
+              <div class="yape-label">Número de Yape</div>
+              <div class="yape-phone"><span>${esc(o.yape?.number || "—")}</span>
+                <button type="button" data-copy="${esc(o.yape?.number || "")}" aria-label="Copiar número de Yape">Copiar</button></div>
+            </div>
+            <p class="yape-holder">Titular: ${esc(o.yape?.name || "—")}</p>
+            <p class="yape-help">${qrImage ? "Escanea el QR o usa el número de celular." : "Usa el número de celular."} Paga el monto aprobado y adjunta tu comprobante aquí abajo.</p>
+          </div>
+          ${qrImage ? `<figure class="yape-qr">
+            <a class="yape-qr-image" href="${esc(qrImage)}" target="_blank" rel="noopener" aria-label="Ver QR de Yape en tamaño completo">
+              <img src="${esc(qrImage)}" alt="Código QR de Yape para pagar tu pedido en Kliky" width="614" height="633" />
+            </a>
+            <figcaption>Escanea con Yape</figcaption>
+            <div class="yape-qr-actions">
+              <a href="${esc(qrImage)}" target="_blank" rel="noopener">Ampliar QR ↗</a>
+              <a href="${esc(qrImage)}" download="Kliky-QR-Yape.jpg">Guardar QR ↓</a>
+            </div>
+          </figure>` : ""}
         </div>
         <form id="payForm" class="form-grid" style="margin-top:16px">
           <div class="field span2"><span>Captura de Yape *</span>
