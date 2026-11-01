@@ -3,8 +3,9 @@
    Edita este archivo después de desplegar la API en Vercel.
    ------------------------------------------------------------------ */
 window.APP_CONFIG = {
-  // URL de la API en Vercel (sin barra final)
-  API_BASE: "https://tienda-streaming-swart.vercel.app",
+  // Vacío: usa /api del mismo despliegue Vercel (producción, preview o local).
+  // Solo cambia este valor si alojas el frontend en otro dominio.
+  API_BASE: "",
 
   BRAND: "N3TFL1X Store",
   TAGLINE: "Cuentas de streaming, IA y libros digitales al mejor precio",

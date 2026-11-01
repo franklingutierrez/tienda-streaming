@@ -5,7 +5,7 @@
   "use strict";
 
   const CFG = window.APP_CONFIG || {};
-  const API = String(CFG.API_BASE || "").replace(/\/+$/, "");
+  const API = String(CFG.API_BASE || location.origin).replace(/\/+$/, "");
   const CUR = CFG.CURRENCY || "S/";
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
@@ -120,6 +120,14 @@
   }
 
   function bindUI() {
+    // Los errores de imagen no burbujean: capturarlos conserva la tarjeta y su distintivo.
+    $("#productGrid").addEventListener("error", (event) => {
+      const img = event.target;
+      if (!img.matches?.("img[data-product-cover]")) return;
+      img.hidden = true;
+      const fallback = img.parentElement.querySelector(".p-placeholder");
+      if (fallback) fallback.hidden = false;
+    }, true);
     $("#cartBtn").addEventListener("click", openCart);
     $("#dockCart")?.addEventListener("click", openCart);
     $("#closeCart").addEventListener("click", closeCart);
@@ -218,7 +226,8 @@
         <article class="p-card" style="--i:${i}">
           <div class="p-media ${esc(key)}">
             ${p.highlighted ? `<span class="p-flag">Recomendado</span>` : ""}
-            ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" />` : emoji}
+            <span class="p-placeholder" aria-hidden="true" ${p.image ? "hidden" : ""}>${emoji}</span>
+            ${p.image ? `<img data-product-cover src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" />` : ""}
           </div>
           <div class="p-body">
             <div class="p-top">

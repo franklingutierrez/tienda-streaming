@@ -2,3 +2,6 @@
 .env.*
 .git
 README.md
+.vercel/
+scripts/
+test/

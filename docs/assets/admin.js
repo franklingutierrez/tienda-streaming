@@ -5,7 +5,7 @@
   "use strict";
 
   const CFG = window.APP_CONFIG || {};
-  const API = String(CFG.API_BASE || "").replace(/\/+$/, "");
+  const API = String(CFG.API_BASE || location.origin).replace(/\/+$/, "");
   const CUR = CFG.CURRENCY || "S/";
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));

@@ -1,39 +1,53 @@
-# Tienda N3TFL1X · HTML + Notion + Vercel
+# Tienda N3TFL1X · Vercel + Notion
 
-Tienda de cuentas de streaming, cuentas de IA y libros digitales.
-Frontend en **HTML puro** publicado con **GitHub Pages** (`/docs`), datos en **Notion**
-y una **Vercel Function** como API para que el token de Notion nunca llegue al navegador.
+**Vercel sirve el frontend y la API**. **Notion guarda el catálogo, las portadas y
+los registros privados**. GitHub versiona el código y activa el despliegue de `main`.
 
-```
-Cliente pide → admin aprueba monto → cliente paga por Yape y sube captura
-→ admin valida → credenciales visibles en el enlace privado del pedido
-```
+- [Tienda](https://tienda-streaming-swart.vercel.app)
+- [Panel administrativo](https://tienda-streaming-swart.vercel.app/admin.html)
+- [Gestión en Notion](https://www.notion.so/40b13bccc7ed81a4a48bee4ae07c5210)
+- [Guía de operación y despliegue](docs/README.md)
 
-## Estructura
+## Cambiar una portada
 
-| Ruta | Qué es |
+En Notion, abre **01 · Catálogo de Productos**, entra al producto y pulsa
+**Agregar portada / Cambiar portada**. Recarga la web o espera el refresco de un
+minuto. No necesitas subir imágenes a GitHub ni volver a desplegar.
+Sin portada, o si falla su carga, se muestra el icono de la categoría.
+
+## Organización
+
+| Componente | Responsabilidad |
 |---|---|
-| `docs/` | Frontend estático (GitHub Pages) |
-| `docs/index.html` | Tienda y seguimiento del pedido |
-| `docs/admin.html` | Panel de administración |
-| `api/index.js` | Entrada de la Vercel Function |
-| `lib/api-core.js` | Toda la lógica de la API (rutas, Notion, sesiones) |
-| `vercel.json` | Configuración de la función |
+| `docs/` | Tienda, seguimiento privado y panel publicados por Vercel |
+| `api/index.js` | Entrada de la función de Vercel |
+| `lib/api-core.js` | Catálogo, pedidos, pagos, sesiones y acceso privado a Notion |
+| Cinco bases de Notion | Productos, Clientes, Promociones, Ventas y Pedidos, Comprobantes Yape |
+| `scripts/restructure-notion.mjs` | Auditoría y migración de la estructura existente |
+| `test/` | Pruebas del catálogo y las portadas |
+| `.github/workflows/check.yml` | Validación; Vercel realiza el despliegue |
 
-## Puesta en marcha
+## Desarrollo
 
-**Ya está desplegado:** <https://tienda-streaming-swart.vercel.app>
-· panel: `/admin.html`
+```sh
+npm run check
+npm test
+# Con Vercel CLI y variables locales configuradas:
+npm run dev
+```
 
-La guía completa está en **[docs/README.md](docs/README.md)**:
-configurar Notion, desplegar la API en Vercel, variables de entorno, publicar en
-GitHub Pages (opcional) y checklist de pruebas.
+`API_BASE: ""` usa la API del mismo dominio, tanto en producción como en previews.
+Configura los secretos en Vercel y en `.env` local (ver `.env.example`).
+Nunca publiques tokens, contraseñas ni respaldos de Notion en GitHub.
 
-Resumen del despliegue:
+## Reestructuración de Notion
 
-1. Proyecto de Vercel importado desde este repo.
-2. Variables: `NOTION_TOKEN`, `ADMIN_PASSWORD`, `ALLOWED_ORIGIN`, `YAPE_NUMBER`, `YAPE_NAME`.
-3. Vercel sirve el frontend desde `docs/` (`"outputDirectory": "docs"` en `vercel.json`).
-4. La API vive en `/api` y recibe la ruta lógica en `?route=/api/...`.
+```sh
+npm run notion:plan   # Consulta, respalda y muestra cambios
+npm run notion:apply  # Aplica cambios y verifica los registros
+```
 
-> Nunca subas `.env`: contiene secretos. El `.gitignore` ya lo protege.
+El script apunta a las cinco bases de esta tienda. Conserva registros, relaciones
+y campos de la API. Retira solo los campos antiguos especificados que estén vacíos
+y sin dependencias. Archiva los bloques del manual antiguo después de escribir el
+nuevo. Guarda respaldos privados en `.vercel/notion-backup/`, excluido de Git y Vercel.
